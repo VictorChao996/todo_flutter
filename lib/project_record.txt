@@ -1,0 +1,32 @@
+/*
+ *  時間: 2021/8/27
+ *  練習項目: toDoListWith hive package , 新增的list可以儲存到 local了
+ *             安卓機上可以成功運行，不過Edge & Chrome 都失敗了 (大概是抓不到hive資料)，
+ *            另外的還有一個問題是listView.builder的繪製會優先於 HiveBox資料的提取(看之後要怎麼解決)
+ *  預計計畫: 可以自定義增加的list string
+/*
+ * 時間: 2021/8/29
+ * 練習項目: 參考網路上toDoList的範例code來實現 hive Box 的 操作 
+ *          1. 使用 ValueListenableBuilder 來監聽 Hive.box
+ *          2. 測試結果下來沒有遇到其他的問題(網頁的部分也沒有遇到任何問題)
+ *          3. 輸入字串的 Dialog 完成
+ /* 
+ * 時間:2021/8/30
+ * 練習項目: 1.自定義 class 存取到 Hive 中
+ *          2.修改 Hive.box 的操作
+ *          3. toDo 的 資料新增 createaTime、completeTime、Done 等參數
+ /*
+ * 時間: 2021/9/1 
+ * 更動項目: 1. 建立ReorderableListView 在listView的外層，這樣listView中的 todo list 就可以拖動
+ *          2. listView外層原本用Expansion包住，現在改回 slidable ，因為 expansion 會跟 ReorderableListView 的 拖動動作有衝突
+ /*
+ * 時間: 2021/9/2
+ * 更動項目: 1.ReorderableListView中的buildDefaultDragHandles可以設為false關閉預設拖動事件，
+ *            自己重新定義一個(使用ReorderableDragStartListener或 ReorderableDelayedDragStartListener包住要拖動的widget,前者處理
+ *              短按事件，後者為long pressed事件)，這邊使用後者，這樣才不會跟Slidable的手勢有所衝突
+ *          2.Hive.box 資料的清除&存取成功(clear()返回一個future，所以要await之後再add資料進去才不會抱錯)
+ */
+ *
+ /*
+ * 時間: 2021/9/6
+ * 更動項目: 把todo listile改成 CheckboxListTile，再把value & onChange 事件綁定 ToDo class 中的 done 變數(連同 Hive的更新都設定)

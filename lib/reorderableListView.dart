@@ -31,6 +31,16 @@ class BuildReorderableListView extends StatefulWidget {
 
 class _BuildReorderableListViewState extends State<BuildReorderableListView> {
   late var deadlineDate;
+
+  //method for refresh individual Hive data
+  refreshHiveData() async {
+    //clear返回一個Future，這邊 await 一下 不然在清除之前就執行下面的add 方法會報錯
+    await Hive.box<ToDo>('todos').clear();
+    for (var todo in widget.todos) {
+      Hive.box<ToDo>('todos').add(todo);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ReorderableListView.builder(
@@ -58,14 +68,22 @@ class _BuildReorderableListViewState extends State<BuildReorderableListView> {
                 //把listile用這個widget包住(在長按下拖動的 widget)，如果是ReorderableDragStartListener會跟自定義的slidable有手勢衝突
                 child: ReorderableDelayedDragStartListener(
                   index: index,
-                  child: ListTile(
-                    dense: false,
-                    leading: Icon(Icons.task),
-                    trailing: Icon(
-                      Icons.drag_handle,
-                      size: 30.0,
+                  child: CheckboxListTile(
+                    value: todo.done,
+                    onChanged: (value) async {
+                      print('checked');
+                      todo.done = value!;
+                      print(todo.done);
+                      refreshHiveData();
+                    },
+                    dense: true,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 8.0),
+                    controlAffinity: ListTileControlAffinity.trailing,
+                    title: Text(
+                      todo.name,
+                      style: Theme.of(context).textTheme.headline5,
                     ),
-                    title: Text(todo.name),
+                    secondary: Icon(Icons.task),
                     subtitle: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,11 +128,7 @@ class _BuildReorderableListViewState extends State<BuildReorderableListView> {
               print(widget.todos[i].name);
             }
           });
-          //clear返回一個Future，這邊 await 一下 不然在清除之前就執行下面的add 方法會報錯
-          await Hive.box<ToDo>('todos').clear();
-          for (var todo in widget.todos) {
-            Hive.box<ToDo>('todos').add(todo);
-          }
+          refreshHiveData();
         });
   }
 }

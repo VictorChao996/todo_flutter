@@ -4,7 +4,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todo_app/toDoListWithHive.dart';
 import 'package:todo_app/todo.dart';
 
-
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
@@ -24,11 +23,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors.amber,
           floatingActionButtonTheme: FloatingActionButtonThemeData(
               backgroundColor: Colors.amber[700])),
-      // home: Center(
-      //     child: ConstrainedBox(
-      //   constraints: BoxConstraints(maxWidth: 450),
-      //   child: toDoListWithHive(),
-      // ))
+
       home: toDoListWithHive(), //2021/8/29
     );
   }

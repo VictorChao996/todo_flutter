@@ -12,8 +12,6 @@
  */
 
 import 'dart:async';
-
-
 import 'todo.dart';
 import 'toDoDialog.dart';
 import 'reorderableListView.dart';
@@ -55,14 +53,38 @@ class ToDoMainScreen extends StatelessWidget {
                   });
             },
             child: Icon(Icons.add),
+            tooltip: 'ADD',
           ),
           FloatingActionButton(
             onPressed: () {
-              print('delete all toDo');
-              //onPressed事件: 清除box 中的資料(上方 valueListenable會監聽事件，根據事件重新build )
-              Hive.box<ToDo>('todos').clear();
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('要刪除所有的todo嗎?'),
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('CANCEL')),
+                        TextButton(
+                            onPressed: () {
+                              //onPressed事件: 清除box 中的資料(上方 valueListenable會監聽事件，根據事件重新build )
+                              print('delete all toDo');
+                              Hive.box<ToDo>('todos').clear();
+                              Navigator.of(context).pop();
+                            },
+                            child: Text(
+                              'DELETE ALL',
+                              style: TextStyle(color: Colors.red),
+                            )),
+                      ],
+                    );
+                  });
             },
             child: Icon(Icons.delete),
+            tooltip: 'DELETE',
           )
         ],
       ),
