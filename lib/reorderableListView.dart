@@ -33,7 +33,7 @@ class BuildReorderableListView extends StatefulWidget {
 
 class _BuildReorderableListViewState extends State<BuildReorderableListView> {
   late var deadlineDate;
-  late IconType iconType;
+  // IconType iconType = IconType(iconTypeIndex: 0);
 
   //method for refresh individual Hive data
   refreshHiveData() async {
@@ -87,7 +87,7 @@ class _BuildReorderableListViewState extends State<BuildReorderableListView> {
                       style: Theme.of(context).textTheme.headline5,
                     ),
                     secondary:
-                        iconType.showIconWithTypeIndex(todo.listIconType),
+                        new IconType().showIconWithTypeIndex(todo.listIconType),
                     subtitle: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
