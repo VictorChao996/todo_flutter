@@ -33,7 +33,7 @@ class _ToDoDialogState extends State<ToDoDialog> {
         //height: MediaQuery.of(context).size.height / 6,
         content: Column(
           mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             TextField(
               decoration: InputDecoration(
@@ -43,13 +43,22 @@ class _ToDoDialogState extends State<ToDoDialog> {
               controller: textController,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ToggleButtons(
                   children: [
-                    Icon(Icons.school),
-                    Icon(Icons.home),
-                    Icon(Icons.favorite),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(25, 20, 25, 20),
+                      child: Icon(Icons.school),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(25, 20, 25, 20),
+                      child: Icon(Icons.home),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(25, 20, 25, 20),
+                      child: Icon(Icons.favorite),
+                    ),
                   ],
                   isSelected: _selections,
                   selectedColor: Theme.of(context).primaryColor,
@@ -64,18 +73,18 @@ class _ToDoDialogState extends State<ToDoDialog> {
                     });
                   },
                 ),
-                TextButton(
-                    onPressed: () async {
-                      print('openDatePicker');
-                      pickDate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(2030));
-                    },
-                    child: Text('選擇到期日')),
               ],
             ),
+            TextButton(
+                onPressed: () async {
+                  print('openDatePicker');
+                  pickDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2030));
+                },
+                child: Text('選擇到期日')),
           ],
         ),
         actions: [

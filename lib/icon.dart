@@ -7,7 +7,7 @@ class IconType {
 
   //根據選擇的 icontype 選擇返回的 icon樣式
   //在下方自定義 icon 種類
-  Icon showIconWithTypeIndex(int iconTypeIndex) {
+  Widget showIconWithTypeIndex(int iconTypeIndex) {
     switch (iconTypeIndex) {
       case 0:
         return Icon(
