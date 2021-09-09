@@ -12,7 +12,6 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
-  int selectIndex = 0;
   MyApp({Key? key}) : super(key: key);
 
   @override

@@ -6,6 +6,8 @@
  *  預計計畫: 可以自定義增加的list string
  */
 
+import 'package:google_fonts/google_fonts.dart';
+
 import 'todo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,6 +42,10 @@ class _toDoListWithHiveState extends State<toDoListWithHive> {
             if (snapshot.error != null) {
               print(snapshot.error);
               return Scaffold(
+                appBar: AppBar(
+                  title: Text('todo',
+                      style: GoogleFonts.dancingScript(fontSize: 30)),
+                ),
                 body: Center(
                   child: Text('Something went wrong\n Please Restart the app'),
                 ),

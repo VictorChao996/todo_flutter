@@ -20,13 +20,14 @@ class ToDoAdapter extends TypeAdapter<ToDo> {
       ..name = fields[0] as String
       ..createdTime = fields[1] as DateTime?
       ..deadline = fields[2] as DateTime?
-      ..done = fields[3] as bool;
+      ..done = fields[3] as bool
+      ..listIconType = fields[4] as int;
   }
 
   @override
   void write(BinaryWriter writer, ToDo obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -34,7 +35,9 @@ class ToDoAdapter extends TypeAdapter<ToDo> {
       ..writeByte(2)
       ..write(obj.deadline)
       ..writeByte(3)
-      ..write(obj.done);
+      ..write(obj.done)
+      ..writeByte(4)
+      ..write(obj.listIconType);
   }
 
   @override

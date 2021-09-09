@@ -18,4 +18,7 @@ class ToDo extends HiveObject {
 
   @HiveField(3)
   bool done = false;
+
+  @HiveField(4)
+  late int listIconType;
 }

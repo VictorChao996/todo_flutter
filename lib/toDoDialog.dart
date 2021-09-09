@@ -2,6 +2,8 @@
  * 時間: 2021/8/29
  * 輸入代辦清單的 Dialog 
  */
+import 'package:todo_app/icon.dart';
+
 import 'todo.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -17,6 +19,8 @@ class _ToDoDialogState extends State<ToDoDialog> {
   //設置textEditingController來獲取textField中的文字
   TextEditingController textController = TextEditingController();
   DateTime? pickDate; //pickDate就是completeDate (to do 的deadline)
+  List<bool> _selections = List.generate(3, (index) => false);
+  int iconTypeIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +37,7 @@ class _ToDoDialogState extends State<ToDoDialog> {
           children: [
             TextField(
               decoration: InputDecoration(
-                hintText: '輸入代辦事項',
+                labelText: '輸入代辦事項',
                 border: OutlineInputBorder(),
               ),
               controller: textController,
@@ -41,6 +45,25 @@ class _ToDoDialogState extends State<ToDoDialog> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                ToggleButtons(
+                  children: [
+                    Icon(Icons.school),
+                    Icon(Icons.home),
+                    Icon(Icons.favorite),
+                  ],
+                  isSelected: _selections,
+                  selectedColor: Theme.of(context).primaryColor,
+                  renderBorder: false,
+                  onPressed: (int index) {
+                    setState(() {
+                      for (int i = 0; i < _selections.length; i++) {
+                        _selections[i] = false;
+                      }
+                      _selections[index] = true;
+                      iconTypeIndex = index;
+                    });
+                  },
+                ),
                 TextButton(
                     onPressed: () async {
                       print('openDatePicker');
@@ -69,7 +92,8 @@ class _ToDoDialogState extends State<ToDoDialog> {
                     ..name = textController.text
                     ..createdTime = DateTime.now()
                     ..deadline = pickDate
-                    ..done = false;
+                    ..done = false
+                    ..listIconType = iconTypeIndex;
                   Hive.box<ToDo>('todos').add(todo);
                 }
                 Navigator.of(context).pop();

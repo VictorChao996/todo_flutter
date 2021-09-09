@@ -9,6 +9,8 @@
  *          2.Hive.box 資料的清除&存取成功(clear()返回一個future，所以要await之後再add資料進去才不會抱錯)
  */
 
+import 'package:todo_app/icon.dart';
+
 import 'todo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -31,6 +33,7 @@ class BuildReorderableListView extends StatefulWidget {
 
 class _BuildReorderableListViewState extends State<BuildReorderableListView> {
   late var deadlineDate;
+  late IconType iconType;
 
   //method for refresh individual Hive data
   refreshHiveData() async {
@@ -83,7 +86,8 @@ class _BuildReorderableListViewState extends State<BuildReorderableListView> {
                       todo.name,
                       style: Theme.of(context).textTheme.headline5,
                     ),
-                    secondary: Icon(Icons.task),
+                    secondary:
+                        iconType.showIconWithTypeIndex(todo.listIconType),
                     subtitle: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
