@@ -9,9 +9,9 @@
  *          2.Hive.box 資料的清除&存取成功(clear()返回一個future，所以要await之後再add資料進去才不會抱錯)
  */
 
-import 'package:todo_app/icon.dart';
+import 'package:todo_app/model/icon.dart';
 
-import 'todo.dart';
+import 'model/todo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hive/hive.dart';

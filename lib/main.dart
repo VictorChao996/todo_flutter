@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todo_app/toDoListWithHive.dart';
-import 'package:todo_app/todo.dart';
+import 'package:todo_app/model/todo.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,8 +20,11 @@ class MyApp extends StatelessWidget {
       title: 'Todo list',
       theme: ThemeData(
           primaryColor: Colors.amber,
+          primarySwatch: Colors.orange,
           floatingActionButtonTheme: FloatingActionButtonThemeData(
-              backgroundColor: Colors.amber[700])),
+              elevation: 5,
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.amber[500])),
 
       home: toDoListWithHive(), //2021/8/29
     );

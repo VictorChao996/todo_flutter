@@ -8,7 +8,7 @@
 
 import 'package:google_fonts/google_fonts.dart';
 
-import 'todo.dart';
+import 'model/todo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';

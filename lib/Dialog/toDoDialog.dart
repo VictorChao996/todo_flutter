@@ -2,9 +2,9 @@
  * 時間: 2021/8/29
  * 輸入代辦清單的 Dialog 
  */
-import 'package:todo_app/icon.dart';
+import 'package:todo_app/model/icon.dart';
 
-import 'todo.dart';
+import '../model/todo.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
@@ -19,7 +19,8 @@ class _ToDoDialogState extends State<ToDoDialog> {
   //設置textEditingController來獲取textField中的文字
   TextEditingController textController = TextEditingController();
   DateTime? pickDate; //pickDate就是completeDate (to do 的deadline)
-  List<bool> _selections = List.generate(3, (index) => false);
+  // List<bool> _selections = List.generate(3, (index) => false);
+  List<bool> _selections = [true, false, false];
   int iconTypeIndex = 0;
 
   @override
@@ -49,7 +50,11 @@ class _ToDoDialogState extends State<ToDoDialog> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.fromLTRB(25, 20, 25, 20),
-                      child: Icon(Icons.school),
+                      // child: Icon(Icons.school),
+                      child: Tooltip(
+                        message: '學校',
+                        child: Icon(Icons.school),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(25, 20, 25, 20),
